@@ -31,7 +31,6 @@ using namespace std;
 #endif
 
 #define GLM_FORCE_RADIANS
-#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -86,9 +85,7 @@ void loadData(string filename, vector<float> &vols, vector<float> &vals){
   float maxval = 0.0f;
   float maxvol = 0;
   while ( file.good() ) {
-   // TO DO (read data file)
-   float adjclose = 0.0f;
-   float volume = 0.0f;
+   // TO DO
 
    vals.push_back(adjclose);
    vols.push_back(volume);
@@ -200,13 +197,11 @@ GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path
 
 int loadModelA(vector<float> &vecVols, vector<float> &vecVals, GLuint VertexArrayIDA){
 
-  int bufSize = 100; // TODO
+  GLfloat g_vertex_buffer_dataA[...];
+  //GLfloat g_vertex_normal_dataA[...];
+  GLfloat g_vertex_color_dataA[...];
 
-  GLfloat g_vertex_buffer_dataA[bufSize];
-  GLfloat g_vertex_normal_dataA[bufSize]; // TODO: used in glBufferData !!!
-  GLfloat g_vertex_color_dataA[bufSize];
-
-  for(int i=0; i<bufSize; i++){
+  for(int i=0; i<...; i++){
     g_vertex_buffer_dataA[i] = 0.654321;
     g_vertex_color_dataA[i]  = 0.654321;;
   }
@@ -216,7 +211,7 @@ int loadModelA(vector<float> &vecVols, vector<float> &vecVals, GLuint VertexArra
   }
 
   // on teste s'il ne reste pas notre valeur bizarre dans le tableau = on a pas oublie de cases !
-  for(int i=0; i<bufSize; i++)
+  for(int i=0; i<...; i++)
     if (g_vertex_buffer_dataA[i] > 0.654320 && g_vertex_buffer_dataA[i] < 0.654322)
       cout << i<<" EVIL IS IN THE DETAIL !" << endl ;
 
@@ -283,13 +278,10 @@ int loadModelA(vector<float> &vecVols, vector<float> &vecVals, GLuint VertexArra
 
 
 int loadModelB(vector<float> &vecVols, vector<float> &vecVals, GLuint VertexArrayIDB){
-
-  int bufSize = 3*3*N; //TODO
-
-  GLfloat g_vertex_buffer_dataB[bufSize]; // 4 triangles of 3 points with 3 coordinates each
+  GLfloat g_vertex_buffer_dataB[...]; // 4 triangles of 3 points with 3 coordinates each
 
   //cout<< "loadModelB " << (sizeof(g_vertex_buffer_dataB)/(sizeof(float)))<<" % "<<(3*3*4*(N))<<endl;
-  for(int i=0; i<bufSize; i++)
+  for(int i=0; i<...; i++)
     g_vertex_buffer_dataB[i] = 0.654321;
 
   // on rajoute des faces et de la hauteur a notre figure
@@ -299,7 +291,7 @@ int loadModelB(vector<float> &vecVols, vector<float> &vecVals, GLuint VertexArra
 
   // TO DO
 
-  for(int i=0; i<bufSize; i++)
+  for(int i=0; i<...; i++)
     if (g_vertex_buffer_dataB[i] > 0.654320 && g_vertex_buffer_dataB[i] < 0.654322)
       cout << i<<" EVIL IS IN THE DETAIL !" << endl ;
 
@@ -426,20 +418,14 @@ int main(){
   int m42 = loadModelB(vols40, vals40, VertexArrayIDB4);
 
   GLuint ProgramA        = LoadShaders( "projet2018A.vs", "projet2018A.fs" );
-// TODO
-/*
   GLint  uniform_...     = glGetUniformLocation(ProgramA, "...");
   GLint  uniform_...     = glGetUniformLocation(ProgramA, "...");
   ...
-*/
 
   GLuint ProgramB        = LoadShaders( "projet2018B.vs", "projet2018B.fs" );
-// TODO
-/*
   GLint  uniform_...     = glGetUniformLocation(ProgramB, "...");
   GLint  uniform_...     = glGetUniformLocation(ProgramB, "...");
   ...
-*/
 
   do {
     // clear before every draw
@@ -452,8 +438,6 @@ int main(){
     // onchange de matrice de projection : la projection orthogonale est plus propice a la visualization !
     //glm::mat4 projectionMatrix = glm::perspective(glm::radians(66.0f), 1024.0f / 768.0f, 0.1f, 200.0f);
     glm::mat4 projectionMatrix = glm::ortho( -1.0f, 1.0f, -1.0f, 1.0f, -6.f, 6.f );
-    
-    float angle = 0.0f; // TODO
 
     float camPos[3] = {1.2*cos(angle), 1.2*sin(angle), -0.5};
     glm::mat4 viewMatrix       = glm::lookAt(
@@ -466,10 +450,8 @@ int main(){
 
 
     // on envoie les valeurs uniforme aux shaders
-
-    // TODO    
-    //glUniform...(...,  1, GL_FALSE, glm::value_ptr(viewMatrix));
-    //....
+    glUniform...(...,  1, GL_FALSE, glm::value_ptr(viewMatrix));
+    ....
 
     // on re-active les VAO avant d'envoyer les buffers
     glBindVertexArray(VertexArrayIDA1);
@@ -486,10 +468,8 @@ int main(){
 
 
     glUseProgram(ProgramB);
-    
-    // TODO
-    //glUniform...(...,  1, GL_FALSE, glm::value_ptr(viewMatrix));
-    //...
+    glUniform...(...,  1, GL_FALSE, glm::value_ptr(viewMatrix));
+    ...
 
     glBindVertexArray(VertexArrayIDB1);
     glDrawArrays(GL_TRIANGLES, 0, m12); // Starting from vertex 0 .. all the buffer
