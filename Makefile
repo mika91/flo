@@ -3,9 +3,9 @@ CFLAGS=-Wall -O -I/usr/local/include/ -I/public/ig/glm/
 LDFLAGS=-lglfw -lGLEW -lGL
 DEPS=
 
-all: project2018
+all: projet2018
 
-project2018: projet2018.o 
+projet2018: projet2018.o 
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 projet2018.o: projet2018.cpp
@@ -15,4 +15,4 @@ clean:
 	rm -f *.o core
 
 clean-all: clean
-	rm -f project2018
+	rm -f projet2018
