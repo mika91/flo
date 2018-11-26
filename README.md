@@ -1,2 +1,3 @@
 # flo
-demo for Flo
+
+git repository demonstration (for Flo)
