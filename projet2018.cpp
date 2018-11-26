@@ -345,8 +345,10 @@ int main(){
   if( !glfwInit() ) {
       fprintf( stderr, "Failed to initialize GLFW\n" );
       return -1;
-  }
-
+  }  
+  
+  // Load data files
+  /*
   vector<float> vols10;
   vector<float> vals10;
 
@@ -364,7 +366,9 @@ int main(){
   loadData("data/AMZN.csv",  vols30, vals30);
   loadData("data/MSFT.csv",  vols40, vals40);
   N = vals10.size()-3;
+  */
 
+  // set window hints
   glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // On veut OpenGL 3.3
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -399,6 +403,7 @@ int main(){
   glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
   // Bon maintenant on cree les IDs de VAO
+  /*
   GLuint VertexArrayIDA1, VertexArrayIDB1;
   GLuint VertexArrayIDA2, VertexArrayIDB2;
   GLuint VertexArrayIDA3, VertexArrayIDB3;
@@ -426,26 +431,22 @@ int main(){
   int m42 = loadModelB(vols40, vals40, VertexArrayIDB4);
 
   GLuint ProgramA        = LoadShaders( "projet2018A.vs", "projet2018A.fs" );
-// TODO
-/*
   GLint  uniform_...     = glGetUniformLocation(ProgramA, "...");
   GLint  uniform_...     = glGetUniformLocation(ProgramA, "...");
   ...
-*/
 
   GLuint ProgramB        = LoadShaders( "projet2018B.vs", "projet2018B.fs" );
-// TODO
-/*
   GLint  uniform_...     = glGetUniformLocation(ProgramB, "...");
   GLint  uniform_...     = glGetUniformLocation(ProgramB, "...");
   ...
-*/
+  */
 
   do {
     // clear before every draw
     glClearColor( 1.0, 1.0, 1.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    /*
     // Use our shader program
     glUseProgram(ProgramA);
 
@@ -466,10 +467,8 @@ int main(){
 
 
     // on envoie les valeurs uniforme aux shaders
-
-    // TODO    
-    //glUniform...(...,  1, GL_FALSE, glm::value_ptr(viewMatrix));
-    //....
+    glUniform...(...,  1, GL_FALSE, glm::value_ptr(viewMatrix));
+    ....
 
     // on re-active les VAO avant d'envoyer les buffers
     glBindVertexArray(VertexArrayIDA1);
@@ -483,13 +482,12 @@ int main(){
 
     glBindVertexArray(VertexArrayIDA4);
     glDrawArrays(GL_TRIANGLES, 0, m41);
+    */
 
-
+    /*
     glUseProgram(ProgramB);
-    
-    // TODO
-    //glUniform...(...,  1, GL_FALSE, glm::value_ptr(viewMatrix));
-    //...
+    glUniform...(...,  1, GL_FALSE, glm::value_ptr(viewMatrix));
+    ...
 
     glBindVertexArray(VertexArrayIDB1);
     glDrawArrays(GL_TRIANGLES, 0, m12); // Starting from vertex 0 .. all the buffer
@@ -502,6 +500,7 @@ int main(){
 
     glBindVertexArray(VertexArrayIDB4);
     glDrawArrays(GL_TRIANGLES, 0, m42);
+    */
 
     // on desactive le VAO a la fin du dessin
     glBindVertexArray (0);
